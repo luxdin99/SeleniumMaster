@@ -3,6 +3,6 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = ".",tags = "@bag")
+@CucumberOptions(features = ".",tags = "@sort")
 public class RunTests {
 }

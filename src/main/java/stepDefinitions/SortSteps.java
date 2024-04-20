@@ -3,6 +3,7 @@ package stepDefinitions;
 import functionLibrary.CommonFunctions;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.messages.types.Product;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -56,7 +57,7 @@ public class SortSteps extends CommonFunctions {
             productNames.add(actualProduct.getText());
         }
 
-        List<String> sortedProductNames = new ArrayList<>();
+        List<String> sortedProductNames = new ArrayList<>(productNames);
         Collections.sort(sortedProductNames);
 
         Assert.assertTrue(productNames.equals(sortedProductNames));
@@ -72,22 +73,58 @@ public class SortSteps extends CommonFunctions {
             productNames.add(actualProduct.getText());
         }
 
-        List<String> sortedProductNames = new ArrayList<>();
-        Collections.reverse(sortedProductNames);
+        List<String> sortedProductNames = new ArrayList<>(productNames);
+        Collections.sort(sortedProductNames, Collections.reverseOrder());
 
         Assert.assertTrue(productNames.equals(sortedProductNames));
 
-        //if reverse doesn't work to verify descending order
-        //Collections.sort(sortedProductNames,Collections.reverseOrder());
 
     }
 
     @Then("I expect products to be sorted in price ascending order")
     public void verifyProductPriceLowToHigh() {
+        List<WebElement> actualPriceElements = findElements(driver, By.xpath("//div[@data-test ='inventory-item-price']"));
+        List<Double> actualPrices = new ArrayList<>();
+        for (WebElement actualPricesElement : actualPriceElements) {
+            String priceAsText = actualPricesElement.getText();
+
+            try {
+                Double priceAsDigits = Double.parseDouble(priceAsText);
+                actualPrices.add(priceAsDigits);
+            } catch (NumberFormatException e) {
 
 
+            }
+        }
+        List<Double> sortedActualPrices = new ArrayList<>(actualPrices);
+        Collections.sort(sortedActualPrices);
+
+        Assert.assertTrue(actualPrices.equals(sortedActualPrices));
+
+    }
+
+    @Then("I expect products to be sorted in price descending order")
+    public void verifyProductPriceHighToLow() {
+        List<WebElement> actualPriceElements = findElements(driver, By.xpath("//div[@data-test ='inventory-item-price']"));
+        List<Double> actualPrices = new ArrayList<>();
+        for (WebElement actualPricesElement : actualPriceElements) {
+            String priceAsText = actualPricesElement.getText();
+
+            try {
+                Double priceAsDigits = Double.parseDouble(priceAsText);
+                actualPrices.add(priceAsDigits);
+            } catch (NumberFormatException e) {
+
+
+            }
+        }
+        List<Double> sortedActualPrices = new ArrayList<>(actualPrices);
+        Collections.sort(sortedActualPrices, Collections.reverseOrder());
+
+        Assert.assertTrue(actualPrices.equals(sortedActualPrices));
     }
 
 
 }
+
 

@@ -15,7 +15,6 @@ import java.util.List;
 
 public class BagSteps extends CommonFunctions {
 
-
     @Given("I am on homepage {string}")
     public void openHomePage(String url) {
         //For the below in common functions -do =goToUrl(driver,url)

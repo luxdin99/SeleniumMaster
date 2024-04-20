@@ -8,7 +8,7 @@ Feature: As a user
   @sort
   Scenario: Verify sort options exists
     When I click sort dropdown
-    Then I should see options "Name (A to Z)","Name (Z to A)","Price (low to high)","Price (low to high)"
+    Then I should see options "Name (A to Z)","Name (Z to A)","Price (low to high)","Price (high to low)"
 
   @sort
   Scenario: Verify sort option Name (A to Z)
@@ -19,7 +19,7 @@ Feature: As a user
   Scenario: Verify sort options Name (Z to A)
 
     When  I choose option "Name (Z to A)"
-    Then Then I expect products to be sorted in descending order
+    Then I expect products to be sorted in descending order
 
   @sort
   Scenario: Verify sort option price (low to high)
